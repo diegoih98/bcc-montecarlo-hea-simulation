@@ -120,16 +120,8 @@ def create_hea_bcc(elements, bcc_points,molar_percentage ):
     
     return hea_elements
 
-
+# Build a neighbor list for a structured BCC lattice with alternating α and β sites using 3D PBC.
 def build_structured_neighbor_list(num_points):
-    """
-    Build a neighbor list for a structured BCC lattice with alternating α and β sites,
-    using full 3D periodic boundary conditions (wrap in x, y, and z).
-
-
-    Returns:
-    - neighbor_list: list where neighbor_list[i] contains indices of the 8 nearest neighbors of atom i
-    """
     neighbor_list = []
     total_layers = 2 * num_points # z has 2*num_points layers in your construction
 
@@ -164,21 +156,8 @@ def build_structured_neighbor_list(num_points):
 
     return neighbor_list
 
-
+# Return the 8 nearest neighbors and their indices for a given atom index in a structured BCC lattice using PBC.
 def find_nearest_neighbors(lattice, selected_atom_index, num_points):
-    """
-    Drop-in replacement for finding nearest neighbors in a structured BCC lattice.
-
-    Inputs:
-    - lattice: output from create_bcc_lattice()
-    - selected_atom_index: integer index in lattice
-    - num_points: number of unit cells along x and y (used to generate the lattice)
-
-    Returns:
-    - nearest_neighbors: positions of the 8 nearest neighbors (shape: [8, 3])
-    - nearest_neighbor_indices: indices of those neighbors in the lattice
-    """
-
     total_layers = 2 * num_points  # Matches create_bcc_lattice logic
 
     def reverse_index(idx):
